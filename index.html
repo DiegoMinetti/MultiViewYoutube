@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Matriz YouTube Drag & Drop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div id="dropzone">
+    <div>Arrastrá acá enlaces de YouTube o ingresá uno abajo:</div>
+    <form id="ytform" style="margin-top:10px; display:flex; gap:5px; justify-content:center;">
+      <input id="ytinput" type="text" placeholder="Pega un enlace de YouTube" style="flex:1; min-width:200px; max-width:400px; padding:6px; border-radius:5px; border:1px solid #444; background:#181818; color:#eee;">
+      <button type="submit" style="padding:6px 16px; border-radius:5px; border:none; background:#e62117; color:white; font-weight:bold; cursor:pointer;">Agregar</button>
+    </form>
+  </div>
+  <div id="grid"></div>
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script type="module" src="app.js"></script>
+
+</body>
+</html>
