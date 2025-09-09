@@ -5,13 +5,13 @@ const dropzone = document.getElementById('dropzone');
 const grid = document.getElementById('grid');
 // IDs de videos en vivo por defecto
 const DEFAULT_VIDEOS = [
-  // Reemplaza estos IDs por los de tus streams en vivo favoritos
-  'ArKbAx1K-2U', // a24
-  'cb12KmMMDJA', // tn
-  'gEsUfOMzaJc', // mitre
-  'jTDk5CswBVk', // c5n
-  'OLMiTr2OUeU', // canal26
-  'wuWPTItW6gU', // neura
+  // IDs por defecto pedidos por el usuario
+  'ArKbAx1K-2U',
+  'cb12KmMMDJA',
+  'OLMiTr2OUeU',
+  'avly0uwZzOE',
+  '5f__Ls4_VYQ',
+  'Uo-ziJhrTvI',
 ];
 let videos = JSON.parse(localStorage.getItem('videos'));
 if (!Array.isArray(videos) || videos.length === 0) {
@@ -84,6 +84,7 @@ export function unmuteSelected(idx) {
   Array.from(grid.children).forEach((div, i) => {
     if (div && div.style) {
       div.style.border = (i === idx) ? '3px solid #e62117' : '3px solid transparent';
+      div.style.opacity = (i === idx) ? '1' : '0.5';
     }
     const btn = div.querySelector('button[data-action="select"]');
     if (btn) btn.textContent = (i === idx) ? 'Deseleccionar' : 'Seleccionar';
@@ -112,7 +113,7 @@ export function createPlayers() {
           if (selectedIdx === idx) {
             setTimeout(() => {
               unmuteSelected(idx);
-            }, 300);
+            }, 1000);
           }
         },
         'onStateChange': () => {}
@@ -132,7 +133,10 @@ grid.addEventListener('click', function(e) {
       selectedIdx = null;
       localStorage.removeItem('selectedIdx');
       Array.from(grid.children).forEach((div, i) => {
-        if (div && div.style) div.style.border = '3px solid transparent';
+        if (div && div.style) {
+          div.style.border = '3px solid transparent';
+          div.style.opacity = '1';
+        }
         const btn = div.querySelector('button[data-action="select"]');
         if (btn) btn.textContent = 'Seleccionar';
       });
@@ -401,6 +405,40 @@ grid.addEventListener('drop', function(e) {
   dragSrcIdx = null;
 });
 
+// Fullscreen button logic
+const fullscreenBtn = document.getElementById('fullscreen-btn');
+const fullscreenIcon = document.getElementById('fullscreen-icon');
+let isFullscreen = false;
+
+function updateFullscreenIcon() {
+  fullscreenIcon.textContent = isFullscreen ? 'fullscreen_exit' : 'fullscreen';
+}
+
+fullscreenBtn.addEventListener('click', () => {
+  if (!isFullscreen) {
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen();
+    } else if (document.documentElement.webkitRequestFullscreen) {
+      document.documentElement.webkitRequestFullscreen();
+    }
+    isFullscreen = true;
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
+    isFullscreen = false;
+  }
+  updateFullscreenIcon();
+});
+
+document.addEventListener('fullscreenchange', () => {
+  isFullscreen = !!document.fullscreenElement;
+  updateFullscreenIcon();
+});
+
+updateFullscreenIcon();
 // Service Worker
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
