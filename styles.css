@@ -1,8 +1,11 @@
+/* Fullscreen button styles */
 body {
   margin: 0;
   font-family: sans-serif;
   background: #111;
   color: #eee;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 #dropzone {
   padding: 20px;
@@ -111,7 +114,7 @@ iframe {
 }
 .btn-toggle-top {
   position: absolute;
-  right: 10px;
+  left: 10px;
   top: 5px;
   z-index: 10;
   background: #222;
@@ -131,7 +134,7 @@ iframe {
 #top-area.collapsed .btn-toggle-top {
   position: fixed;
   top: 10px;
-  right: 10px;
+  left: 10px;
   opacity: 1;
   pointer-events: auto;
   background: #222;
@@ -141,10 +144,68 @@ iframe {
 .floating-toggle {
   position: fixed !important;
   top: 10px !important;
-  right: 10px !important;
+  left: 10px !important;
   z-index: 9999 !important;
   opacity: 1 !important;
   pointer-events: auto !important;
   background: #222 !important;
   box-shadow: 0 2px 8px #000a !important;
+}
+.btn-toggle-top {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  z-index: 10;
+  background: #757575;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #000a;
+  transition: background 0.2s;
+}
+#top-area.collapsed .btn-toggle-top {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  opacity: 1;
+  pointer-events: auto;
+  background: #222;
+  z-index: 9999;
+  box-shadow: 0 2px 8px #000a;
+}
+.floating-toggle {
+  position: fixed !important;
+  top: 16px !important;
+  left: 16px !important;
+  z-index: 9999 !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  background: #757575 !important;
+  box-shadow: 0 2px 8px #000a !important;
+}
+.fullscreen-btn {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 9999;
+  background: #757575;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px #000a;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 24px;
+}
+.fullscreen-btn:hover {
+  background: #444;
 }
