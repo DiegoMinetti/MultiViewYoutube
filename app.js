@@ -84,7 +84,7 @@ export function unmuteSelected(idx) {
   Array.from(grid.children).forEach((div, i) => {
     if (div && div.style) {
       div.style.border = (i === idx) ? '3px solid #e62117' : '3px solid transparent';
-      div.style.opacity = (i === idx) ? '1' : '0.5';
+      div.style.opacity = (i === idx) ? '1' : '0.4';
     }
     const btn = div.querySelector('button[data-action="select"]');
     if (btn) btn.textContent = (i === idx) ? 'Deseleccionar' : 'Seleccionar';
